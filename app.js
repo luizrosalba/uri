@@ -38,8 +38,7 @@ function iniciaSomatório(vec, R) {
     let somat = 0, somat_saida = 1;
     i = 0;
     do {
-        if ( i === (vec.length - 1) ) 
-        {
+        if (i === (vec.length - 1)) {
             i = 0;
             somat_saida++;
         }
@@ -52,6 +51,13 @@ function iniciaSomatório(vec, R) {
     return somat_saida;
 }
 
+function classificacao(nivel){
+    let saida=0;
+    if (nivel >= 20)  saida = 3 ; 
+    if (nivel < 20)  saida  = 2 ; 
+    if (nivel < 10 )  saida  = 1 ; 
+    return saida; 
+}
 
 
 //// funcao que deve ser executada no teste 
@@ -62,24 +68,28 @@ function programa() {
     var lines = input.split('\n');
     //console.log(lines[0].split(" ")); // entrada do uri 
     let ent = formataEntrada(lines);
-    lines = ent.slice(); /// string de vetores 
+    //lines = ent.slice(); /// string de vetores 
     //console.log(lines);
     /// Programa 
-    let vec = [];
-    let V = [];
-    let flag = true;
-    let R = parseInt(lines[0]);
-    vec.push(R);
-    //console.log(R);
-    let i = 0;
-    do {
-        i++;
-        vec.push(parseInt(lines[i]));
-        //console.log("linha " + V);
-        if (vec[i] > R) {
-            console.log(iniciaSomatório(vec, vec[i])); /// imprime quantas vezes eu preciso somar vec para ultrapassar R
-            flag = false;
-        }
-    }while (flag === true);
+    
+    
+    let j=0;
+    let L = parseInt(ent[0]);
+    //console.log(L);
+    let Vi = [];
+    do{
+        Vi = lines[j+1].split(" ");
+        Vi  = Vi.map((x) =>parseInt(x));
+        let valUnicos = [...new Set(Vi.sort((current,next) => next - current))]; 
+        //console.log(valUnicos[0]);
+        console.log(classificacao(valUnicos[0]));        
+        /// proxima iteracao 
+        j=j+2;
+        L = parseInt(lines[j]);
+    }while(L!="" && !isNaN(L))
+
+    //
+
+    
 }
 programa();

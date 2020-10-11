@@ -1,3 +1,6 @@
+sanduicheiche 
+
+```Javascript
 /// funcoes auxiliares 
 function reverseString(str) {
     return str.split("").reverse().join("");
@@ -60,9 +63,11 @@ module.exports = function programa() {
 
 
 
+```
 
 
 
+```Javascript
 
 
 /// funcoes auxiliares 
@@ -142,4 +147,6 @@ function programa() {
 programa();
 
 
+
+```
 
