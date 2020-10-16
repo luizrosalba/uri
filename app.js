@@ -13,15 +13,7 @@ function formataEntrada(lines) {
     }
     return lines;
 }
-/// remove entradas vazias e nan, undefined de um vetor 
-function Valida(vec) {
-    let filtrado = [];
-    for (let i = 0; i < vec.length; i++) {
-        let val = vec[i];
-        if (!isNaN(val) && val !== "") filtrado.push(vec[i]); /// REMOVE NAN e espaço vazio 
-    }
-    return filtrado;
-}
+
 
 
 function Imprime(vec) {
@@ -51,14 +43,43 @@ function iniciaSomatório(vec, R) {
     return somat_saida;
 }
 
-function classificacao(nivel){
-    let saida=0;
-    if (nivel >= 20)  saida = 3 ; 
-    if (nivel < 20)  saida  = 2 ; 
-    if (nivel < 10 )  saida  = 1 ; 
-    return saida; 
+function classificacao(nivel) {
+    let saida = 0;
+    if (nivel >= 20) saida = 3;
+    if (nivel < 20) saida = 2;
+    if (nivel < 10) saida = 1;
+    return saida;
 }
 
+
+function Valida(vec) {
+    console.log(vec);
+    let filtrado = [];
+    for (let i = 0; i < vec.length; i++) {
+        let val = vec[i];
+        if (!isNaN(val) && val !== "" && val !== "EOF" && val !== " ")
+            filtrado.push(vec[i]); /// REMOVE NAN e espaço vazio 
+    }
+
+    return filtrado;
+}
+
+function formataVecString(ent) {
+
+    
+    let underscore = /_/;
+    let estrela = /\*/;
+    let saida = (ent.normalize()) ;  /// pure function 
+    while (saida.includes("*") || saida.includes("_")) 
+    {
+        saida = saida.replace(underscore, "<i>");
+        saida = saida.replace(underscore, "</i>");
+        saida = saida.replace(estrela, "<b>");
+        saida = saida.replace(estrela, "</b>");
+        
+    }
+    console.log(saida);
+}
 
 //// funcao que deve ser executada no teste 
 //module.exports = function programa() {
@@ -71,25 +92,11 @@ function programa() {
     //lines = ent.slice(); /// string de vetores 
     //console.log(lines);
     /// Programa 
-    
-    
-    let j=0;
-    let L = parseInt(ent[0]);
-    //console.log(L);
-    let Vi = [];
-    do{
-        Vi = lines[j+1].split(" ");
-        Vi  = Vi.map((x) =>parseInt(x));
-        let valUnicos = [...new Set(Vi.sort((current,next) => next - current))]; 
-        //console.log(valUnicos[0]);
-        console.log(classificacao(valUnicos[0]));        
-        /// proxima iteracao 
-        j=j+2;
-        L = parseInt(lines[j]);
-    }while(L!="" && !isNaN(L))
 
-    //
+    lines.forEach(val => {
+        formataVecString(val);
+    });
 
-    
+
 }
 programa();
